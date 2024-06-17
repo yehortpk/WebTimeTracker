@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table
@@ -18,10 +19,10 @@ public class Track {
     private int id;
     private int userId;
     private String url;
-    private LocalDateTime start;
-    private LocalDateTime finish;
+    private ZonedDateTime start;
+    private ZonedDateTime finish;
 
-    public Track(int userId, String url, LocalDateTime start) {
+    public Track(int userId, String url, ZonedDateTime start) {
         this.userId = userId;
         this.url = url;
         this.start = start;

@@ -12,6 +12,7 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,7 +45,7 @@ class TrackerServiceITTest {
 
     @Test
     void shouldReturnEntityWithEqualURLAfterSave() {
-        LocalDateTime currentTime = LocalDateTime.now();
+        ZonedDateTime currentTime = ZonedDateTime.now();
         String someUrl = "some_url";
         Track track = new Track(1, someUrl, currentTime);
         trackerService.saveTrack(track);

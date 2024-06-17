@@ -14,6 +14,7 @@ import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -47,7 +48,7 @@ class TrackerControllerITTest {
 
     @Test
     void addTrackShouldCreateEntityInDB() {
-        LocalDateTime currentTime = LocalDateTime.now();
+        ZonedDateTime currentTime = ZonedDateTime.now();
         String someUrl = "some_url";
         TrackDTO track = new TrackDTO(1, someUrl, currentTime);
         trackerController.addTrack(track);
