@@ -1,0 +1,42 @@
+services:
+  analyzer:
+    container_name: analyzer-local
+    build:
+      context: ./analyzer
+      dockerfile: local.Dockerfile
+    environment:
+      MYSQL_USERNAME: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    networks:
+      - tracker-local-network
+    ports:
+      - "5005:5005"
+      - "8080:8080"
+    depends_on:
+      analyzer-db:
+        condition: service_healthy
+
+  analyzer-db:
+    image: mysql:8.3.0
+    container_name: analyzer-db-local
+    volumes:
+      - analyzer-local-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - tracker-local-network
+    environment:
+      MYSQL_DATABASE: analyzer
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_PASSWORD}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+networks:
+   tracker-local-network:
+    driver: bridge
+
+volumes:
+  analyzer-local-data:
