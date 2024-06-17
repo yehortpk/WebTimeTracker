@@ -1,0 +1,22 @@
+{
+    "name": "Web Time tracker",
+    "version": "1.0.0",
+    "description": "Tracks time spent on sites",
+    "manifest_version": 3,
+    "action":{
+        "default_title": "Web Time tracker"
+    },
+    "permissions": ["tabs", "scripting"],
+    "host_permissions": [
+        "http://localhost:8080/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+        "matches": ["<all_urls>"],
+        "js": ["content.js"]
+        }
+    ]
+}
