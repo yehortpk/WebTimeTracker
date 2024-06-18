@@ -11,7 +11,6 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.MySQLContainer;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
@@ -47,7 +46,7 @@ class TrackerServiceITTest {
     void shouldReturnEntityWithEqualURLAfterSave() {
         ZonedDateTime currentTime = ZonedDateTime.now();
         String someUrl = "some_url";
-        Track track = new Track(1, someUrl, currentTime);
+        Track track = new Track(1, someUrl, currentTime.minusSeconds(10), currentTime);
         trackerService.saveTrack(track);
         Optional<Track> trackById = trackRepository.findById(1);
         assertThat(trackById.get().getUrl()).isEqualTo(someUrl);

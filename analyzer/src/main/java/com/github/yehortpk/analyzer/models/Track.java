@@ -3,13 +3,11 @@ package com.github.yehortpk.analyzer.models;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 
 @Entity
 @Table
 @NoArgsConstructor
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
@@ -22,9 +20,10 @@ public class Track {
     private ZonedDateTime start;
     private ZonedDateTime finish;
 
-    public Track(int userId, String url, ZonedDateTime start) {
+    public Track(int userId, String url, ZonedDateTime start, ZonedDateTime finish) {
         this.userId = userId;
         this.url = url;
         this.start = start;
+        this.finish = finish;
     }
 }
