@@ -6,17 +6,12 @@
     "action":{
         "default_title": "Web Time tracker"
     },
-    "permissions": ["tabs", "scripting"],
+    "minimum_chrome_version": "121",
+    "permissions": ["storage", "tabs"],
     "host_permissions": [
         "http://localhost:8080/*"
     ],
     "background": {
         "service_worker": "background.js"
-    },
-    "content_scripts": [
-        {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"]
-        }
-    ]
+    }
 }
